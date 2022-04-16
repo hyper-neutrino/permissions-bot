@@ -15,13 +15,11 @@ export default new Command({
             .sort((x, y) => y.comparePositionTo(x))) {
             if (query.id == role.id || query.name == "@everyone") continue;
 
-            const permissions = role.permissions.toArray();
-
-            if (permissions.length == 0) continue;
+            if (query.permissions.toArray().length == 0) continue;
 
             if (
-                permissions.bitfield &
-                (role.bitfield == permissions.bitfield)
+                (query.permissions.bitfield & role.permissions.bitfield) ==
+                query.permissions.bitfield
             ) {
                 found.push(query);
             }
@@ -31,7 +29,7 @@ export default new Command({
             content:
                 found.length == 0
                     ? `No roles have permissions that are a subset of ${role}.`
-                    : `The following roles have non-empty permissions but are a subset of ${role}: ${query
+                    : `The following roles have non-empty permissions but are a subset of ${role}: ${found
                           .map((role) => role.toString())
                           .join(", ")}`,
             allowedMentions: { parse: [] },

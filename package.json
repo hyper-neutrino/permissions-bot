@@ -8,7 +8,11 @@
     "discord-markdown-embeds": "^2.0.5",
     "file-ez": "^1.0.0",
     "fs": "^0.0.1-security",
+    "mongodb": "^4.5.0",
     "node-fetch": "^3.2.3",
     "paimon.js": "^1.0.5"
+  },
+  "devDependencies": {
+    "@types/mongodb": "^4.0.7"
   }
 }

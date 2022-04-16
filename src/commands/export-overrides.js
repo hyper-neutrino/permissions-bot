@@ -1,5 +1,5 @@
 import { Command } from "paimon.js";
-import { channel_tag, simplify } from "../lib/format.js";
+import { channel_tag, simplify, tag_override } from "../lib/format.js";
 
 export default new Command({
     name: "export overrides",
@@ -24,23 +24,7 @@ export default new Command({
             );
 
             for (const entry of channel.permissionOverwrites.cache.values()) {
-                let tag = "???";
-
-                if (entry.type == "role") {
-                    try {
-                        tag = `role: ${
-                            (await cmd.guild.roles.fetch(entry.id)).name
-                        }`;
-                    } catch {}
-                } else if (entry.type == "member") {
-                    try {
-                        tag = `user: ${
-                            (await cmd.client.users.fetch(entry.id)).tag
-                        }`;
-                    } catch {}
-                }
-
-                rows.push(tag);
+                rows.push(await tag_override(cmd, entry));
 
                 let any = false;
 

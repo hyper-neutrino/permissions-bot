@@ -14,6 +14,18 @@ export function list(array, separator = "and") {
     }
 }
 
+export async function tag_override(cmd, entry) {
+    try {
+        return `role: ${(await cmd.guild.roles.fetch(entry.id)).name}`;
+    } catch {}
+
+    try {
+        return `user: ${(await cmd.client.users.fetch(entry.id)).tag}`;
+    } catch {}
+
+    return "???";
+}
+
 export const simplify = {
     CREATE_INSTANT_INVITE: "invite",
     KICK_MEMBERS: "kick",
