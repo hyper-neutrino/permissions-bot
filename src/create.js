@@ -7,7 +7,7 @@ process.on("uncaughtException", (error) => {
 
 client.on("ready", async () => {
     await client.deploy({
-        guild_id: "805458032908959804",
+        guild_id: config.guild_id,
         commands: process.argv.length > 2 ? process.argv.slice(2) : undefined,
         log: true,
     });
