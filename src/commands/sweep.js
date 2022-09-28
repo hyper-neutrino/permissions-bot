@@ -10,6 +10,7 @@ export default [
             await cmd.deferReply({ ephemeral: true });
 
             for (const channel of (await cmd.guild.channels.fetch()).values()) {
+                if (!channel) continue;
                 if (channel.permissionsLocked) continue;
                 await channel.permissionOverwrites.delete(target);
             }
@@ -41,6 +42,7 @@ export default [
             }[setting];
 
             for (const channel of (await cmd.guild.channels.fetch()).values()) {
+                if (!channel) continue;
                 if (channel.permissionsLocked) continue;
                 await channel.permissionOverwrites.edit(target, obj);
             }
