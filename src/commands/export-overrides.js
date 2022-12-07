@@ -15,7 +15,7 @@ export default new Command({
         const rows = [];
 
         for (const channel of cmd.guild.channels.cache.values()) {
-            if (!channel) continue;
+            if (!channel?.permissionOverwrites) continue;
             if (channel.permissionOverwrites.cache.size == 0) continue;
 
             rows.push(
